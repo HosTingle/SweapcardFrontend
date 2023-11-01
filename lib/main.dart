@@ -134,52 +134,6 @@ class _MainPageState extends State<MainPage> {
         : Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ElevatedButton(
-          style: ButtonStyle(
-            foregroundColor:
-            getColor(Colors.blue, Colors.white, isDislike),
-            backgroundColor:
-            getColor(Colors.white, Colors.blue, isDislike),
-            side: getBorder(Colors.blue, Colors.white, isDislike),
-          ),
-          child: Icon(Icons.arrow_back, size: 46),
-          onPressed: () {
-            final provider =
-            Provider.of<CardProvider>(context, listen: false);
-
-            provider.dislike();
-          },
-        ),
-        ElevatedButton(
-          style: ButtonStyle(
-            foregroundColor:
-            getColor(Colors.red, Colors.white, isSuperLike),
-            backgroundColor:
-            getColor(Colors.white, Colors.red, isSuperLike),
-            side: getBorder(Colors.red, Colors.white, isSuperLike),
-          ),
-          child: Icon(Icons.clear, size: 40),
-          onPressed: () {
-            final provider =
-            Provider.of<CardProvider>(context, listen: false);
-
-            provider.superLike();
-          },
-        ),
-        ElevatedButton(
-          style: ButtonStyle(
-            foregroundColor: getColor(Colors.teal, Colors.white, isLike),
-            backgroundColor: getColor(Colors.white, Colors.teal, isLike),
-            side: getBorder(Colors.teal, Colors.white, isLike),
-          ),
-          child: Icon(Icons.check_box, size: 40),
-          onPressed: () {
-            final provider =
-            Provider.of<CardProvider>(context, listen: false);
-
-            provider.like();
-          },
-        ),
       ],
     );
   }

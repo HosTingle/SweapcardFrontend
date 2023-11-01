@@ -1,9 +1,10 @@
 import 'dart:math';
 
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Model/user.dart';
+import '../Model/Word.dart';
 import '../provider/card_provider.dart';
 
 class TinderCard extends StatefulWidget {
@@ -84,16 +85,24 @@ class _TinderCardState extends State<TinderCard> {
 
   Widget buildCard() => buildCardShadow(
     child: ClipRRect(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(13),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white
+          color: Colors.white, // Kenarları siyah yapar
         ),
-        child: Container(
+        child: FlipCard(
+          fill: Fill.fillBack, // Fill the back side of the card to make in the same size as the front.
+          direction: FlipDirection.HORIZONTAL, // default
+          side: CardSide.FRONT, // The side to initially display.
+          front: Container(
 
-          padding: EdgeInsets.all(20),
-          child: Container(
-            child: Center(child: buildName()),
+            padding: EdgeInsets.all(20),
+            child: Container(
+              child: Center(child: buildName()),
+            ),
+          ),
+          back: Container(color: Colors.white,child:
+              buildbackName()
           ),
         ),
       ),
@@ -103,12 +112,13 @@ class _TinderCardState extends State<TinderCard> {
   Widget buildCardShadow({required Widget child}) => ClipRRect(
     borderRadius: BorderRadius.circular(22),
     child: Container(
-      padding: EdgeInsets.all(2),
+      padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
+            spreadRadius: 20,
             blurRadius: 20,
-            color: Colors.white12,
+            color: Colors.black,
           ),
         ],
       ),
@@ -178,6 +188,7 @@ class _TinderCardState extends State<TinderCard> {
               color: color,
               fontSize: 48,
               fontWeight: FontWeight.bold,
+
             ),
           ),
         ),
@@ -186,6 +197,7 @@ class _TinderCardState extends State<TinderCard> {
   }
 
   Widget buildActive() => Row(
+
     children: [
       Container(
         decoration: BoxDecoration(
@@ -202,6 +214,36 @@ class _TinderCardState extends State<TinderCard> {
       ),
     ],
   );
+  Widget buildbackName() => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    Text(
+      widget.words.firstWord!,
+      style: TextStyle(
+        fontSize: 40,
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    SizedBox(height: 5),
+      Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Container(// Düşündüğünüz metin yüksekliği kadar bir değer belirleyin
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              widget.words.sentence!,
+              textAlign: TextAlign.center, // Metni yatayda da ortala
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      )
+  ]
+  );
 
   Widget buildName() => Column(
     mainAxisAlignment: MainAxisAlignment.center,
@@ -209,33 +251,19 @@ class _TinderCardState extends State<TinderCard> {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            widget.words.firstWord!,
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 20),
           Text(
             widget.words.secondWord!,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 40,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
           ),
         ],
       ),
-      Text(
-        widget.words.sentence!,
-        style: TextStyle(
-          fontSize: 13,
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
     ],
   );
+
+
 }

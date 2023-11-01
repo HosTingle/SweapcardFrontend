@@ -80,3 +80,62 @@ class Words {
     return data;
   }
 }
+class Users {
+  int? UserId;
+  int? AvatarId;
+  String? Username;
+  String? Password;
+  String? Name;
+  String? Surname;
+  DateTime? BirthDate;
+  String? Phone;
+  String? Description;
+  int? ScoreId;
+  bool? Status;
+  int? WordCounterId;
+
+  Users({
+    this.UserId,
+    this.AvatarId,
+    this.Username,
+    this.Password,
+    this.Name,
+    this.Surname,
+    this.BirthDate,
+    this.Phone,
+    this.Description,
+    this.ScoreId,
+    this.Status,
+    this.WordCounterId
+  });
+  Users.fromJson(Map<String, dynamic> json) {
+    UserId = json['UserId']?.toInt();
+    AvatarId = json['AvatarId']?.toInt();
+    Username = json['Username']?.toString();
+    Password= json['Password']?.toString();
+    Name = json['Name']?.toString();
+    Surname = json['Surname']?.toString();
+    BirthDate = json['BirthDate'];
+    Phone = json['Phone']?.toString();
+    Description = json['Description']?.toString();
+    ScoreId = json['ScoreId']?.toInt();
+    Status = json['Status'];
+    WordCounterId = json['WordCounterId']?.toInt();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['UserId'] = UserId ;
+    data['AvatarId'] =AvatarId;
+    data['Username'] = Username;
+    data['Password'] = Password;
+    data['Name'] = Name;
+    data['Surname']=Surname;
+    data['BirthDate'] = BirthDate;
+    data['Phone'] = Phone;
+    data['Description'] = Description;
+    data['ScoreId'] = ScoreId;
+    data['Status'] = Status;
+    data['WordCounterId']=WordCounterId;
+    return data;
+  }
+}

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-
+import '../Profile/profile.dart';
 import '../main.dart';
 import 'Page1.dart';
-import 'Page3.dart';
 class BottomNavigators extends StatefulWidget {
   const BottomNavigators({super.key});
 
   @override
   State<BottomNavigators> createState() => _BottomNavigatorsState();
 }
-var sayfalistesi=[Page1(),MainPage(),Page3()];
+var sayfalistesi=[Page1(),MainPage(),MainPag()];
 int index=0;
 class _BottomNavigatorsState extends State<BottomNavigators> {
   @override
