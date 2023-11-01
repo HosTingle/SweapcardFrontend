@@ -15,6 +15,7 @@ Future main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  HttpOverrides.global = MyHttpOverrides();
   runApp(MyApp());
 }
 
@@ -34,7 +35,6 @@ class MyApp extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             textStyle: TextStyle(fontSize: 32),
             elevation: 8,
-            primary: Colors.white,
             shape: CircleBorder(),
             minimumSize: Size.square(80),
           ),
@@ -82,7 +82,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget buildCards() {
     final provider = Provider.of<CardProvider>(context);
-    final users = provider.users;
+    final users = provider.words;
 
     return users.isEmpty
         ? Center(
@@ -107,7 +107,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget buildButtons() {
     final provider = Provider.of<CardProvider>(context);
-    final users = provider.users;
+    final users = provider.words;
     final status = provider.getStatus();
     final isLike = status == CardStatus.like;
     final isDislike = status == CardStatus.dislike;

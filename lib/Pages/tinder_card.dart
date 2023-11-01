@@ -25,7 +25,7 @@ class _TinderCardState extends State<TinderCard> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final size = MediaQuery.of(context).size;
 
       final provider = Provider.of<CardProvider>(context, listen: false);
@@ -212,16 +212,16 @@ class _TinderCardState extends State<TinderCard> {
           Text(
             widget.words.firstWord!,
             style: TextStyle(
-              fontSize: 32,
+              fontSize: 15,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 10),
           Text(
             widget.words.secondWord!,
             style: TextStyle(
-              fontSize: 32,
+              fontSize: 15,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),

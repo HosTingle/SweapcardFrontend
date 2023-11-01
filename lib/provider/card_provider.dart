@@ -8,13 +8,13 @@ import '../Model/user.dart';
 enum CardStatus { like, dislike, superLike }
 
 class CardProvider extends ChangeNotifier {
-  List<Words> _users = [];
+  List<Words> _words = [];
   bool _isDragging = false;
   double _angle = 0;
   Offset _position = Offset.zero;
   Size _screenSize = Size.zero;
 
-  List<Words> get users => _users;
+  List<Words> get words => _words;
   bool get isDragging => _isDragging;
   Offset get position => _position;
   double get angle => _angle;
@@ -130,52 +130,16 @@ class CardProvider extends ChangeNotifier {
   }
 
   Future _nextCard() async {
-    if (users.isEmpty) return;
+    if (words.isEmpty) return;
 
     await Future.delayed(Duration(milliseconds: 200));
-    _users.removeLast();
+    _words.removeLast();
     resetPosition();
   }
-  void resetUsers() {
-    _users = <Words>[
-      Words(
-
-        firstWord: 'Elaborate',
-        secondWord:"Ayrıntılı",
-        sentence:" He asked me to elaborate on my experience in the field"
-        ,
-      ),
-      Words(
-        firstWord: 'Insight',
-        secondWord:"Anlayış",
-          sentence:" Her insight into the problem was invaluable"
-      ),
-      Words(
-        firstWord: 'Meticulous',
-        secondWord: "Titiz",
-        sentence:
-        'She was known for her meticulous attention to detail',
-      ),
-      Words(
-        firstWord: 'glimpse',
-        secondWord: "göz atmak",
-        sentence:
-        'I caught a glimpse of the beautiful sunset as I was driving',
-      ),
-      Words(
-        firstWord: 'contradict',
-        secondWord: "çelişmek",
-        sentence:
-        'His actions seemed to contradict his previous statements',
-      ),
-      Words(
-        firstWord: 'ample',
-        secondWord: "bol yeterli",
-        sentence:
-        'There was an ample amount of food at the picnic',
-      ),
-    ].reversed.toList();
-
+  void resetUsers() async{
+    wordservice wordSer=wordservice();
+    _words=await wordSer.fetchWords();
+    print("complete");
     notifyListeners();
   }
 }
